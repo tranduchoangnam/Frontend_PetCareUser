@@ -1,8 +1,8 @@
 "use client";
 import { styled, Container, Box } from "@mui/material";
 import React, { useState } from "react";
-import Header from "@/app/demo/layout/header/Header";
-import Sidebar from "@/app/demo/layout/sidebar/Sidebar";
+import Header from "src/app/demo/layout/header/Header";
+import Sidebar from "src/app/demo/layout/sidebar/Sidebar";
 import Footer from "./layout/footer/page";
 
 const MainWrapper = styled("div")(() => ({
@@ -23,8 +23,6 @@ const PageWrapper = styled("div")(() => ({
 interface Props {
   children: React.ReactNode;
 }
-
-
 
 export default function RootLayout({
   children,

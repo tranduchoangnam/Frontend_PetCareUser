@@ -1,18 +1,18 @@
-'use client';
-import { Grid, Pagination, Stack,Paper } from "@mui/material";
-import BaseCard from '@/app/demo/components/shared/BaseCard';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+"use client";
+import { Grid, Pagination, Stack, Paper } from "@mui/material";
+import BaseCard from "src/app/demo/components/shared/BaseCard";
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 
 const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body1,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    height: 60,
-    lineHeight: '60px',
-  }));
-  
-const darkTheme = createTheme({ palette: { mode: 'dark' } });
-const lightTheme = createTheme({ palette: { mode: 'light' } });
+  ...theme.typography.body1,
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+  height: 60,
+  lineHeight: "60px",
+}));
+
+const darkTheme = createTheme({ palette: { mode: "dark" } });
+const lightTheme = createTheme({ palette: { mode: "light" } });
 
 const Paginations = () => {
   return (

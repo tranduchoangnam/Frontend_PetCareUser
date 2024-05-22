@@ -1,27 +1,23 @@
 "use client";
 
 import { Box, Typography } from "@mui/material";
-import { Chewy, Poppins } from "next/font/google";
+import React from "react";
+import { chewy, poppins } from "src/constants/fonts";
 
-const chewy = Chewy({ weight: ["400"], style: ["normal"], subsets: ["latin"] });
-const poppins = Poppins({
-  weight: ["700"],
-  style: ["normal"],
-  subsets: ["latin"],
-});
-
-const AppBanner = ({
+export default function Banner({
   title,
   description,
+  imagePath,
 }: {
-  title: string;
-  description: string;
-}) => {
+  title?: string;
+  description?: string;
+  imagePath: string;
+}) {
   return (
     <Box position="relative">
       <Box
         component="img"
-        src="/images/banners/banner.png"
+        src={imagePath}
         alt="banner"
         sx={{ width: "100vw", position: "relative" }}
       />
@@ -55,5 +51,4 @@ const AppBanner = ({
       </Box>
     </Box>
   );
-};
-export default AppBanner;
+}

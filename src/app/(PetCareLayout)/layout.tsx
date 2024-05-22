@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import Header from "./layout/header/Header";
 import Sidebar from "./layout/sidebar/Sidebar";
 import Footer from "./layout/footer/page";
-import {montserrat} from "@/app/fonts"
+import { montserrat } from "src/constants/fonts";
+
 const MainWrapper = styled("div")(() => ({
   display: "flex",
   minHeight: "100vh",
@@ -34,36 +35,14 @@ export default function RootLayout({
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   return (
     <MainWrapper className="mainwrapper">
-      {/* ------------------------------------------- */}
-      {/* Sidebar */}
-      {/* ------------------------------------------- */}
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         isMobileSidebarOpen={isMobileSidebarOpen}
         onSidebarClose={() => setMobileSidebarOpen(false)}
       />
-      {/* ------------------------------------------- */}
-      {/* Main Wrapper */}
-      {/* ------------------------------------------- */}
       <PageWrapper className="page-wrapper">
-        {/* ------------------------------------------- */}
-        {/* Header */}
-        {/* ------------------------------------------- */}
         <Header toggleMobileSidebar={() => setMobileSidebarOpen(true)} />
-        {/* ------------------------------------------- */}
-        {/* PageContent */}
-        {/* ------------------------------------------- */}
-        {/* ------------------------------------------- */}
-        {/* Page Route */}
-        {/* ------------------------------------------- */}
         <Box sx={{ minHeight: "calc(100vh - 170px)" }}>{children}</Box>
-        {/* ------------------------------------------- */}
-        {/* End Page */}
-        {/* ------------------------------------------- */}
-
-        {/* ------------------------------------------- */}
-        {/* Footer */}
-        {/* ------------------------------------------- */}
         <Footer />
       </PageWrapper>
     </MainWrapper>

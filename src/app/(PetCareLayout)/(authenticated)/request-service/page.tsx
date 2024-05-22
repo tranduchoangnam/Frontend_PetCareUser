@@ -1,8 +1,9 @@
 "use client";
+
 import { Box, Grid, Typography } from "@mui/material";
-import PageContainer from "@/app/demo/components/container/PageContainer";
-import Banner from "@/components/banner/AppBanner";
-import { montserrat, poppins } from "@/app/fonts";
+import PageContainer from "src/app/demo/components/container/PageContainer";
+import Banner from "src/components/banner/AppBanner";
+import { montserrat, poppins } from "src/constants/fonts";
 const Dashboard = () => {
   return (
     <PageContainer title="Dashboard" description="this is Dashboard">
@@ -10,6 +11,7 @@ const Dashboard = () => {
         <Banner
           title="Choose the service you want"
           description="Fill the form below"
+          imagePath="/images/banners/banner.png"
         />
         <Box marginTop="24px" padding="3rem">
           <Grid container spacing={2}>
