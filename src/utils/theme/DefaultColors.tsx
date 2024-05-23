@@ -2,7 +2,6 @@ import { createTheme } from "@mui/material/styles";
 import { DM_Sans } from "next/font/google";
 import theme from "../theme";
 
-
 export const dm = DM_Sans({
   weight: ["400", "500", "700"],
   subsets: ["latin"],
@@ -14,9 +13,9 @@ const baselightTheme = createTheme({
   direction: "ltr",
   palette: {
     primary: {
-      main: "#03c9d7",
+      main: "#E4813A",
       light: "#e5fafb",
-      dark: "#05b2bd",
+      dark: "#E4813A",
       contrastText: "#ffffff",
     },
     secondary: {
@@ -45,7 +44,7 @@ const baselightTheme = createTheme({
     },
     warning: {
       main: "#fec90f",
-      light: '#fff4e5',
+      light: "#fff4e5",
       dark: "#dcb014",
       contrastText: "#ffffff",
     },
@@ -125,13 +124,10 @@ const baselightTheme = createTheme({
     },
   },
   components: {
-
-  
     MuiCssBaseline: {
       styleOverrides: {
         ".MuiPaper-elevation9, .MuiPopover-root .MuiPaper-elevation": {
-          boxShadow:
-            "0px 7px 30px 0px rgba(90, 114, 123, 0.11) !important",
+          boxShadow: "0px 7px 30px 0px rgba(90, 114, 123, 0.11) !important",
         },
         a: {
           textDecoration: "none",
@@ -146,9 +142,40 @@ const baselightTheme = createTheme({
       },
     },
     MuiButton: {
+      defaultProps: {},
       styleOverrides: {
         root: {
+          textTransform: "capitalize",
+          borderRadius: "99px",
+          height: "44px",
           boxShadow: "none",
+        },
+        sizeMedium: {
+          ...theme.typography.button,
+          lineHeight: 1,
+          padding: "8px 24px",
+        },
+        sizeLarge: {
+          padding: "10px 24px",
+        },
+        sizeSmall: {
+          padding: "4px 12px",
+        },
+        outlinedPrimary: {
+          fontWeight: "bold",
+          borderColor: theme.palette.primary.main,
+          color: theme.palette.primary.main,
+          "&:hover, &.Mui-focusVisible": {
+            boxShadow: " 0px 2px 5px 0px " + theme.palette.primary.main,
+          },
+        },
+        textSecondary: {
+          color: theme.palette.mode === "dark" ? "#FEFEF6" : "#585F5A",
+        },
+        textPrimary: {
+          "&:hover": {
+            backgroundColor: theme.palette.primary.light,
+          },
         },
       },
     },
@@ -202,7 +229,6 @@ const baselightTheme = createTheme({
       },
     },
 
-
     MuiAlert: {
       styleOverrides: {
         filledSuccess: {
@@ -248,12 +274,10 @@ const baselightTheme = createTheme({
         outlinedInfo: {
           borderColor: theme.palette.info.main,
           color: theme.palette.info.main,
-        }
+        },
       },
     },
-
   },
-  
 });
 
 export { baselightTheme };

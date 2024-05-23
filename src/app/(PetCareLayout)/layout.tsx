@@ -1,10 +1,11 @@
 "use client";
 import { styled, Container, Box } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./layout/header/Header";
 import Sidebar from "./layout/sidebar/Sidebar";
 import Footer from "./layout/footer/page";
 import { montserrat } from "src/constants/fonts";
+import Aos from "aos";
 
 const MainWrapper = styled("div")(() => ({
   display: "flex",
@@ -33,6 +34,9 @@ export default function RootLayout({
 }) {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  useEffect(() => {
+    Aos.init({ duration: 1500 });
+  }, []);
   return (
     <MainWrapper className="mainwrapper">
       <Sidebar
