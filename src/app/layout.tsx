@@ -2,6 +2,7 @@
 import { baselightTheme } from "src/utils/theme/DefaultColors";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import "aos/dist/aos.css";
 
 export default function RootLayout({
   children,
