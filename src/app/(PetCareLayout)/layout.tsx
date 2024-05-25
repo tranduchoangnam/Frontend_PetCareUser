@@ -6,6 +6,8 @@ import Sidebar from "./layout/sidebar/Sidebar";
 import Footer from "./layout/footer/page";
 import { montserrat } from "src/constants/fonts";
 import Aos from "aos";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MainWrapper = styled("div")(() => ({
   display: "flex",
@@ -27,11 +29,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: Props) {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   useEffect(() => {
@@ -47,6 +45,18 @@ export default function RootLayout({
       <PageWrapper className="page-wrapper">
         <Header toggleMobileSidebar={() => setMobileSidebarOpen(true)} />
         <Box sx={{ minHeight: "calc(100vh - 170px)" }}>{children}</Box>
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <Footer />
       </PageWrapper>
     </MainWrapper>

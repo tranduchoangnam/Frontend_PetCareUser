@@ -7,19 +7,17 @@ import { chewy, poppins } from "src/constants/fonts";
 export default function Banner({
   title,
   description,
-  imagePath,
 }: {
   title?: string;
   description?: string;
-  imagePath: string;
 }) {
   return (
     <Box position="relative">
       <Box
         component="img"
-        src={imagePath}
+        src="/images/banners/banner.png"
         alt="banner"
-        sx={{ width: "100vw", position: "relative" }}
+        sx={{ width: "100%", position: "relative" }}
       />
       <Box
         sx={{

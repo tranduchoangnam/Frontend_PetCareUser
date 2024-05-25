@@ -1,6 +1,7 @@
 import BANNERLANDING from "public/images/banners/banner-landing.png";
 import BANNERLANDING2 from "public/images/banners/banner-landing2.png";
 import BANNERLANDING3 from "public/images/banners/banner-landing3.png";
+import LOGIN_BANNER from "public/images/banners/login-dog.png";
 
 import LOGO_BOARDING from "public/images/logos/pet boarding.png";
 import LOGO_HEALTHCARE from "public/images/logos/healthcare.png";
@@ -17,6 +18,7 @@ export const imagePath = {
   BANNERLANDING,
   BANNERLANDING2,
   BANNERLANDING3,
+  LOGIN_BANNER,
 
   LOGO,
   LOGO_BOARDING,

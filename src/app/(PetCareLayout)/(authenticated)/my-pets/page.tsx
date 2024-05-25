@@ -9,7 +9,6 @@ const MyPets = () => {
         <Banner
           title="Choose the service you want"
           description="Fill the form below"
-          imagePath="/images/banners/banner.png"
         />
       </Box>
     </PageContainer>

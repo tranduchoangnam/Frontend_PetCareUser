@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 import { DM_Sans } from "next/font/google";
 import theme from "../theme";
+import { chewy, poppins } from "src/constants/fonts";
 
 export const dm = DM_Sans({
   weight: ["400", "500", "700"],
@@ -14,13 +15,13 @@ const baselightTheme = createTheme({
   palette: {
     primary: {
       main: "#E4813A",
-      light: "#e5fafb",
+      light: "#FBE2AC",
       dark: "#E4813A",
       contrastText: "#ffffff",
     },
     secondary: {
-      main: "#fb9678",
-      light: "#fcf1ed",
+      main: "#7759CC",
+      light: "#FDF3DC",
       dark: "#e67e5f",
       contrastText: "#ffffff",
     },
@@ -79,7 +80,7 @@ const baselightTheme = createTheme({
   },
 
   typography: {
-    fontFamily: dm.style.fontFamily,
+    fontFamily: poppins.style.fontFamily,
     h1: {
       fontWeight: 500,
       fontSize: "1.875rem",
@@ -111,8 +112,8 @@ const baselightTheme = createTheme({
       lineHeight: "1.5",
     },
     button: {
-      textTransform: "none",
       fontWeight: "400",
+      fontFamily: `${chewy.style.fontFamily}!important`,
     },
     subtitle1: {
       fontSize: "1rem",
@@ -171,8 +172,10 @@ const baselightTheme = createTheme({
         },
         textSecondary: {
           color: theme.palette.mode === "dark" ? "#FEFEF6" : "#585F5A",
+          fontFamily: `${chewy.style.fontFamily}`,
         },
         textPrimary: {
+          fontFamily: `${chewy.style.fontFamily}`,
           "&:hover": {
             backgroundColor: theme.palette.primary.light,
           },
