@@ -16,7 +16,7 @@ const baselightTheme = createTheme({
     primary: {
       main: "#E4813A",
       light: "#FBE2AC",
-      dark: "#E4813A",
+      dark: "#F7CE72",
       contrastText: "#ffffff",
     },
     secondary: {
@@ -168,6 +168,12 @@ const baselightTheme = createTheme({
           color: theme.palette.primary.main,
           "&:hover, &.Mui-focusVisible": {
             boxShadow: " 0px 2px 5px 0px " + theme.palette.primary.main,
+          },
+        },
+        containedPrimary: {
+          backgroundColor: theme.palette.primary.main,
+          "&:hover, &.Mui-focusVisible": {
+            backgroundColor: theme.palette.primary.dark,
           },
         },
         textSecondary: {

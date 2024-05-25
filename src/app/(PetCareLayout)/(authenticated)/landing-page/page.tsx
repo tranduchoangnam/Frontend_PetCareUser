@@ -1,3 +1,4 @@
+"use client";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
@@ -27,6 +28,7 @@ export default function page() {
             textTransform: "initial",
             fontFamily: `${chewy.style.fontFamily}`,
           }}
+          onClick={() => window.location.replace("/request-service")}
         >
           Request Service
         </Button>

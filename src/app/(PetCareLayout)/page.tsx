@@ -1,6 +1,7 @@
 "use client";
 import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import PageContainer from "src/app/demo/components/container/PageContainer";
 import { IconPaw } from "src/common/icon";
 import { chewy, poppins } from "src/constants/fonts";
@@ -8,6 +9,7 @@ import { imagePath } from "src/constants/imagePath";
 import OurServices from "src/views/LandingPage/OurServices";
 
 const LandingPage = () => {
+  const router = useRouter();
   return (
     <PageContainer title="Dashboard" description="this is Dashboard">
       <Box sx={{ position: "relative" }}>
@@ -27,6 +29,7 @@ const LandingPage = () => {
             textTransform: "initial",
             fontFamily: `${chewy.style.fontFamily}`,
           }}
+          onClick={() => router.push("/auth/sign-in")}
         >
           Request Service
         </Button>
@@ -71,6 +74,7 @@ const LandingPage = () => {
             textTransform: "initial",
             fontFamily: `${chewy.style.fontFamily}`,
           }}
+          onClick={() => router.push("/auth/sign-in")}
         >
           Request Service
         </Button>
