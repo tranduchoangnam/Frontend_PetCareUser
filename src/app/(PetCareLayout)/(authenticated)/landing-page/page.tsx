@@ -7,8 +7,10 @@ import { chewy, poppins } from "src/constants/fonts";
 import { imagePath } from "src/constants/imagePath";
 import OurServices from "src/views/LandingPage/OurServices";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { useRouter } from "next/navigation";
 
 export default function page() {
+  const router = useRouter();
   return (
     <>
       <Box sx={{ position: "relative" }}>
@@ -28,7 +30,7 @@ export default function page() {
             textTransform: "initial",
             fontFamily: `${chewy.style.fontFamily}`,
           }}
-          onClick={() => window.location.replace("/request-service")}
+          onClick={() => router.push("/request-service")}
         >
           Request Service
         </Button>
@@ -46,7 +48,7 @@ export default function page() {
         >
           Take care of your pet now
         </Typography>
-        <Grid container spacing={5}>
+        <Grid container spacing={15}>
           <Grid item xs={12} md={4}>
             <Box
               sx={{
@@ -66,6 +68,7 @@ export default function page() {
                   fontFamily: `${chewy.style.fontFamily}`,
                   mt: 6,
                 }}
+                onClick={() => router.push("/register-new-pet")}
               >
                 Register new pet
               </Button>
@@ -144,7 +147,9 @@ export default function page() {
             fontFamily: `${poppins.style.fontFamily}`,
             textAlign: "center",
             textDecoration: "underline",
+            cursor: "pointer",
           }}
+          onClick={() => router.push("/request-service")}
         >
           Book {""}
           <span style={{ color: "#6F32BE" }}>Services</span>
