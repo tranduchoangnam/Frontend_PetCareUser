@@ -10,17 +10,21 @@ import { toast } from "react-toastify";
 
 type TPetInfo = {
   name: string;
-  type: string;
-  weight: string;
+  breed: string;
+  age: string;
+  color: string;
   gender: string;
+  weight: string;
 };
 
 export default function RegisterNewPet() {
   const [petInfo, setPetInfo] = useState<TPetInfo>({
     name: "",
-    type: "",
-    weight: "",
+    breed: "",
+    age: "",
+    color: "",
     gender: "",
+    weight: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,9 +93,9 @@ export default function RegisterNewPet() {
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  label="Pet Type"
-                  name="type"
-                  value={petInfo.type}
+                  label="Breed"
+                  name="breed"
+                  value={petInfo.breed}
                   onChange={handleChange}
                   sx={{ width: "100%" }}
                   size="small"
@@ -101,9 +105,9 @@ export default function RegisterNewPet() {
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  label="Pet Weight"
-                  name="weight"
-                  value={petInfo.weight}
+                  label="Age"
+                  name="age"
+                  value={petInfo.age}
                   onChange={handleChange}
                   sx={{ width: "100%" }}
                   size="small"
@@ -113,7 +117,7 @@ export default function RegisterNewPet() {
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  label="Pet Gender"
+                  label="Gender"
                   name="gender"
                   value={petInfo.gender}
                   onChange={handleChange}
@@ -123,6 +127,32 @@ export default function RegisterNewPet() {
                   required
                 />
               </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Color"
+                  name="color"
+                  value={petInfo.color}
+                  onChange={handleChange}
+                  sx={{ width: "100%" }}
+                  size="small"
+                  color="secondary"
+                  required
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  label="Weight(kg)"
+                  name="weight"
+                  value={petInfo.weight}
+                  onChange={handleChange}
+                  sx={{ width: "100%" }}
+                  size="small"
+                  color="secondary"
+                  required
+                />
+              </Grid>
+            </Grid>
+            <Box sx={{ textAlign: "center" }}>
               <Button
                 variant="contained"
                 color="secondary"
@@ -130,14 +160,13 @@ export default function RegisterNewPet() {
                   width: "30%",
                   textTransform: "inherit",
                   fontSize: "20px",
-                  margin: "0 auto",
                   mt: 5,
                 }}
                 onClick={handleSubmit}
               >
                 Register
               </Button>
-            </Grid>
+            </Box>
           </Grid>
           <Grid item xs={5}>
             <ContactUs />
