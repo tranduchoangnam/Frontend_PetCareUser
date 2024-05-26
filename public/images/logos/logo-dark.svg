@@ -6,7 +6,7 @@
       }
 
       .cls-1, .cls-2 {
-        fill-rule: evenodd;
+        fillRule: evenodd;
       }
 
       .cls-2 {
@@ -15,7 +15,7 @@
       }
 
       .cls-2, .cls-3, .cls-4 {
-        stroke-width: 1px;
+        strokeWidth: 1px;
       }
 
       .cls-3 {
