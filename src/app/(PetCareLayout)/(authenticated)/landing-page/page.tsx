@@ -93,6 +93,7 @@ export default function page() {
                   fontFamily: `${chewy.style.fontFamily}`,
                   mt: 6,
                 }}
+                onClick={() => router.push("/my-pets")}
               >
                 Your pets <NavigateNextIcon />
               </Button>
@@ -117,6 +118,7 @@ export default function page() {
                   fontFamily: `${chewy.style.fontFamily}`,
                   mt: 6,
                 }}
+                onClick={() => router.push("/my-pets")}
               >
                 Pet health
               </Button>
