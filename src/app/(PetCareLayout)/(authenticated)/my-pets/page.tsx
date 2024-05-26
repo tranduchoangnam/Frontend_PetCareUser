@@ -17,67 +17,31 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 type TPetInfo = {
   id: string;
   name: string;
-  type: string;
+  breed: string;
   weight: string;
   gender: string;
-  owner: string;
-  image: string;
+  condition: string;
+  avatar: string;
 };
 
 const petInfo: TPetInfo[] = [
   {
     id: "1",
     name: "Cat",
-    type: "Cat",
+    breed: "Cat",
     weight: "3.4",
-    owner: "John",
     gender: "female",
-    image: "/images/products/cat.png",
+    condition: "Good",
+    avatar: "/images/products/cat.png",
   },
   {
     id: "2",
     name: "Nam",
-    type: "Dog",
+    breed: "Dog",
     weight: "3.4",
     gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
-  },
-  {
-    id: "3",
-    name: "Nam",
-    type: "Dog",
-    weight: "3.4",
-    gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
-  },
-  {
-    id: "4",
-    name: "Nam",
-    type: "Dog",
-    weight: "3.4",
-    gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
-  },
-  {
-    id: "5",
-    name: "Nam",
-    type: "Dog",
-    weight: "3.4",
-    gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
-  },
-  {
-    id: "6",
-    name: "Nam",
-    type: "Dog",
-    weight: "3.4",
-    gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
+    condition: "Require treatment",
+    avatar: "/images/products/dog.png",
   },
 ];
 
@@ -111,26 +75,22 @@ export default function MyPets() {
                 <CardMedia
                   component="img"
                   height="300"
-                  image={pet.image}
+                  image={pet.avatar}
                   alt={pet.name}
                 />
                 <CardContent>
                   <Typography
-                    variant="h4"
+                    variant="h3"
                     component="div"
                     sx={{ fontWeight: 700 }}
                   >
                     {pet.name}
                   </Typography>
-                  <Typography variant="body2" color="#4880FF">
+                  <Typography variant="body1" color="#4880FF">
                     {pet.weight} {""} kg
                   </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ mt: 1 }}
-                  >
-                    Owner: {pet.owner}
+                  <Typography variant="body1" color="#4880FF">
+                    Condition: {pet.condition}
                   </Typography>
                   <Button
                     variant="contained"
@@ -140,7 +100,7 @@ export default function MyPets() {
                       router.push(`/my-pets/detail-pet-info?id=${pet.id}`)
                     }
                   >
-                    Edit pet info
+                    Pet info
                   </Button>
                 </CardContent>
               </Card>

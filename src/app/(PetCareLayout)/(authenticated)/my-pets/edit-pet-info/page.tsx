@@ -20,67 +20,45 @@ import { toast } from "react-toastify";
 type TPetInfo = {
   id: string;
   name: string;
-  type: string;
+  breed: string;
+  age: string;
+  color: string;
   weight: string;
   gender: string;
-  owner: string;
-  image: string;
+  condition: string;
+  avatar: string;
+  disease?: string;
+  medicine?: string;
+  nutrition?: string;
+  treatmentPeriod?: string;
 };
 
 const petInfo: TPetInfo[] = [
   {
     id: "1",
     name: "Cat",
-    type: "Cat",
+    breed: "Cat",
+    age: "2",
+    color: "White",
     weight: "3.4",
-    owner: "John",
     gender: "female",
-    image: "/images/products/cat.png",
+    condition: "Good",
+    avatar: "/images/products/cat.png",
   },
   {
     id: "2",
     name: "Nam",
-    type: "Dog",
+    breed: "Dog",
+    age: "3",
+    color: "Brown",
     weight: "3.4",
     gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
-  },
-  {
-    id: "3",
-    name: "Nam",
-    type: "Dog",
-    weight: "3.4",
-    gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
-  },
-  {
-    id: "4",
-    name: "Nam",
-    type: "Dog",
-    weight: "3.4",
-    gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
-  },
-  {
-    id: "5",
-    name: "Nam",
-    type: "Dog",
-    weight: "3.4",
-    gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
-  },
-  {
-    id: "6",
-    name: "Nam",
-    type: "Dog",
-    weight: "3.4",
-    gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
+    condition: "Require treatment",
+    avatar: "/images/products/dog.png",
+    disease: "Parvovirus",
+    medicine: "Antiviral drugs",
+    nutrition: "High-protein diet",
+    treatmentPeriod: "2 weeks",
   },
 ];
 
@@ -148,43 +126,12 @@ export default function EditPetInfo() {
       <Box sx={{ mt: 5, px: 20 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <Box sx={{ textAlign: "center", position: "relative" }}>
-              <img
-                src={pet.image}
-                alt={pet.name}
-                style={{ width: "50%", height: "auto" }}
-              />
-              <IconButton
-                onClick={handleEditImageClick}
-                sx={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  backgroundColor: "rgba(255, 255, 255, 0.5)",
-                  "&:hover": {
-                    backgroundColor: "rgba(255, 255, 255, 1)",
-                  },
-                }}
-              >
-                <EditIcon />
-              </IconButton>
-              <input
-                type="file"
-                accept="image/*"
-                style={{ display: "none" }}
-                ref={fileInputRef}
-                onChange={handleImageChange}
-              />
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
             <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 rowGap: 3,
-                mr: 5,
+                ml: 10,
               }}
             >
               <Typography
@@ -213,9 +160,9 @@ export default function EditPetInfo() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    label="Pet Type"
-                    name="type"
-                    value={pet.type}
+                    label="Breed"
+                    name="breed"
+                    value={pet.breed}
                     onChange={handleChange}
                     sx={{ width: "100%" }}
                     size="small"
@@ -225,7 +172,31 @@ export default function EditPetInfo() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    label="Pet Weight"
+                    label="Age"
+                    name="age"
+                    value={pet.age}
+                    onChange={handleChange}
+                    sx={{ width: "100%" }}
+                    size="small"
+                    color="secondary"
+                    required
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    label="Color"
+                    name="color"
+                    value={pet.color}
+                    onChange={handleChange}
+                    sx={{ width: "100%" }}
+                    size="small"
+                    color="secondary"
+                    required
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    label="Weight"
                     name="weight"
                     value={pet.weight}
                     onChange={handleChange}
@@ -237,7 +208,7 @@ export default function EditPetInfo() {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    label="Pet Gender"
+                    label="Gender"
                     name="gender"
                     value={pet.gender}
                     onChange={handleChange}
@@ -248,21 +219,52 @@ export default function EditPetInfo() {
                   />
                 </Grid>
               </Grid>
+              <Button
+                variant="contained"
+                color="secondary"
+                sx={{
+                  width: "30%",
+                  textTransform: "inherit",
+                  fontSize: "20px",
+                  margin: "0 auto",
+                  mt: 5,
+                }}
+                onClick={handleSave}
+              >
+                Save
+              </Button>
             </Box>
-            <Button
-              variant="contained"
-              color="secondary"
-              sx={{
-                width: "30%",
-                textTransform: "inherit",
-                fontSize: "20px",
-                margin: "0 auto",
-                mt: 5,
-              }}
-              onClick={handleSave}
-            >
-              Save
-            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Box sx={{ textAlign: "center", position: "relative" }}>
+              <img
+                src={pet.avatar}
+                alt={pet.name}
+                style={{ width: "50%", height: "auto" }}
+              />
+              <IconButton
+                onClick={handleEditImageClick}
+                sx={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  backgroundColor: "rgba(255, 255, 255, 0.5)",
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 255, 255, 1)",
+                  },
+                }}
+              >
+                <EditIcon />
+              </IconButton>
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                ref={fileInputRef}
+                onChange={handleImageChange}
+              />
+            </Box>
           </Grid>
         </Grid>
       </Box>

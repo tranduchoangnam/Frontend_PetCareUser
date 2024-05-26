@@ -1,6 +1,13 @@
 "use client";
 
-import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { montserrat, poppins } from "src/constants/fonts";
@@ -12,67 +19,45 @@ import EditIcon from "@mui/icons-material/Edit";
 type TPetInfo = {
   id: string;
   name: string;
-  type: string;
+  breed: string;
+  age: string;
+  color: string;
   weight: string;
   gender: string;
-  owner: string;
-  image: string;
+  condition: string;
+  avatar: string;
+  disease?: string;
+  medicine?: string;
+  nutrition?: string;
+  treatmentPeriod?: string;
 };
 
 const petInfo: TPetInfo[] = [
   {
     id: "1",
     name: "Cat",
-    type: "Cat",
+    breed: "Cat",
+    age: "2",
+    color: "White",
     weight: "3.4",
-    owner: "John",
     gender: "female",
-    image: "/images/products/cat.png",
+    condition: "Good",
+    avatar: "/images/products/cat.png",
   },
   {
     id: "2",
     name: "Nam",
-    type: "Dog",
+    breed: "Dog",
+    age: "3",
+    color: "Brown",
     weight: "3.4",
     gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
-  },
-  {
-    id: "3",
-    name: "Nam",
-    type: "Dog",
-    weight: "3.4",
-    gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
-  },
-  {
-    id: "4",
-    name: "Nam",
-    type: "Dog",
-    weight: "3.4",
-    gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
-  },
-  {
-    id: "5",
-    name: "Nam",
-    type: "Dog",
-    weight: "3.4",
-    gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
-  },
-  {
-    id: "6",
-    name: "Nam",
-    type: "Dog",
-    weight: "3.4",
-    gender: "male",
-    owner: "John",
-    image: "/images/products/dog.png",
+    condition: "Require treatment",
+    avatar: "/images/products/dog.png",
+    disease: "Parvovirus",
+    medicine: "Antiviral drugs",
+    nutrition: "High-protein diet",
+    treatmentPeriod: "2 weeks",
   },
 ];
 
@@ -101,21 +86,12 @@ export default function DetailPetInfo() {
       <Box sx={{ mt: 5, px: 20 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <Box sx={{ textAlign: "center", position: "relative" }}>
-              <img
-                src={pet.image}
-                alt={pet.name}
-                style={{ width: "50%", height: "auto" }}
-              />
-            </Box>
-          </Grid>
-          <Grid item xs={6}>
             <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 rowGap: 3,
-                mr: 40,
+                ml: 10,
               }}
             >
               <Typography
@@ -159,9 +135,43 @@ export default function DetailPetInfo() {
                     fontWeight: 700,
                   }}
                 >
-                  Type: {""}
+                  Breed: {""}
                 </Typography>
-                <span>{pet.type}</span>
+                <span>{pet.breed}</span>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: montserrat.style.fontFamily,
+                    fontWeight: 700,
+                  }}
+                >
+                  Age: {""}
+                </Typography>
+                <span>{pet.age}</span>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontFamily: montserrat.style.fontFamily,
+                    fontWeight: 700,
+                  }}
+                >
+                  Color: {""}
+                </Typography>
+                <span>{pet.color}</span>
               </Box>
               <Box
                 sx={{
@@ -197,23 +207,90 @@ export default function DetailPetInfo() {
                 </Typography>
                 <span>{pet.gender}</span>
               </Box>
+              <Button
+                variant="contained"
+                color="secondary"
+                sx={{
+                  width: "30%",
+                  textTransform: "inherit",
+                  fontSize: "20px",
+                  margin: "0 auto",
+                  mt: 5,
+                }}
+                onClick={() =>
+                  router.push(`/my-pets/edit-pet-info?id=${pet.id}`)
+                }
+              >
+                Edit
+              </Button>
             </Box>
-            <Button
-              variant="contained"
-              color="secondary"
-              sx={{
-                width: "30%",
-                textTransform: "inherit",
-                fontSize: "20px",
-                margin: "0 auto",
-                mt: 5,
-              }}
-              onClick={() => router.push(`/my-pets/edit-pet-info?id=${pet.id}`)}
-            >
-              Edit
-            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Box sx={{ textAlign: "center", position: "relative" }}>
+              <img
+                src={pet.avatar}
+                alt={pet.name}
+                style={{ width: "50%", height: "auto" }}
+              />
+            </Box>
           </Grid>
         </Grid>
+        <Divider sx={{ my: 5 }} />
+        <Box sx={{ ml: 10, mb: 2 }}>
+          <Typography
+            sx={{
+              fontFamily: poppins.style.fontFamily,
+              fontWeight: 700,
+              color: "#7759CC",
+              fontSize: "30px",
+              mb: 5,
+            }}
+          >
+            Pet Treatment Details
+          </Typography>
+          <Grid container spacing={4}>
+            <Grid item xs={6}>
+              <Typography
+                sx={{
+                  fontFamily: montserrat.style.fontFamily,
+                }}
+              >
+                <span style={{ fontWeight: 700 }}>Disease: {""}</span>
+                {pet.disease || "N/A"}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                sx={{
+                  fontFamily: montserrat.style.fontFamily,
+                }}
+              >
+                <span style={{ fontWeight: 700 }}>Medicine: {""}</span>
+                {pet.medicine || "N/A"}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                sx={{
+                  fontFamily: montserrat.style.fontFamily,
+                }}
+              >
+                <span style={{ fontWeight: 700 }}>Nutrition: {""}</span>
+                {pet.nutrition || "N/A"}
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                sx={{
+                  fontFamily: montserrat.style.fontFamily,
+                }}
+              >
+                <span style={{ fontWeight: 700 }}>Treatment period: {""}</span>
+                {pet.treatmentPeriod || "N/A"}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Box>
       </Box>
     </Box>
   );
