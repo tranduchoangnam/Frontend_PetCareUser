@@ -17,7 +17,7 @@ import { imagePath } from "src/constants/imagePath";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import { signIn } from "src/auth";
+// import { signIn } from "src/auth";
 import { AuthError } from "next-auth";
 import { useRouter } from "next/navigation";
 
@@ -71,7 +71,7 @@ export default function SignInForm() {
 
     if (!emailError && !passwordError) {
       try {
-        await signIn("credentials", {
+        await axios.post("/api/auth/sign-in", {
           email: userInfo.email,
           password: userInfo.password,
         });

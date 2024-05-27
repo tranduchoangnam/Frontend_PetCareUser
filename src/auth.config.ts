@@ -17,6 +17,35 @@ export const authConfig = {
       if (isLoggedIn) return true;
       return false; // Redirect unauthenticated users to login page
     },
+    async jwt({ token, user }) {
+      // Persist the OAuth access_token and or the user id to the token right after signin
+      if (user) {
+        console.log("jwt callback ", { token, user });
+        token.id = user.id;
+        token.role = user.role;
+        token.username = user.username;
+        token.access_token = user.accessToken;
+        token.refresh_token = user.refreshToken;
+      }
+      return token;
+    },
+    async session({ session, token, user }) {
+      console.log("session callback ", { token, user, session });
+
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id as string,
+          email: token.email as string,
+          username: token.username as string,
+          accessToken: token.access_token as string,
+          refreshToken: token.refresh_token as string[],
+          role: token.role as string,
+        },
+        error: token.error,
+      };
+    },
   },
   providers: [
     Credentials({
@@ -39,6 +68,7 @@ export const authConfig = {
           if (token) {
             const accessToken = token.access_token;
             const user = await get_current_user(token.access_token);
+            console.log("authorize callback ", { ...user, accessToken });
             if (user) {
               return { ...user, accessToken };
             }

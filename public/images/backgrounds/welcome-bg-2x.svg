@@ -4,8 +4,8 @@
       .cls-1 {
         fill: #100f12;
         stroke: #000;
-        stroke-width: 1px;
-        fill-rule: evenodd;
+        strokeWidth: 1px;
+        fillRule: evenodd;
       }
     </style>
   </defs>

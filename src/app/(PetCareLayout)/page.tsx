@@ -2,7 +2,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import PageContainer from "src/app/demo/components/container/PageContainer";
+import PageContainer from "src/app/components/container/PageContainer";
 import { IconPaw } from "src/common/icon";
 import { chewy, poppins } from "src/constants/fonts";
 import { imagePath } from "src/constants/imagePath";

@@ -19,7 +19,7 @@ const Search = () => {
         onClick={() => setShowDrawer2(true)}
         size="large"
       >
-        <IconSearch height="20" width="20" stroke-width="1.5" />
+        <IconSearch height="20" width="20" strokeWidth="1.5" />
       </IconButton>
       <Drawer
         anchor="top"

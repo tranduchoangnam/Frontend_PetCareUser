@@ -12,6 +12,7 @@ export async function get_current_user(
         headers: { Authorization: `Bearer ${token}` },
       },
     );
+    console.log(JSON.stringify(res.data));
     return res.data as UserBase;
   } catch (error) {
     console.error("Failed to fetch user:", error);

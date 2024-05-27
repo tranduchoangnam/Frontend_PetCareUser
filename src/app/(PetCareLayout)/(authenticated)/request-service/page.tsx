@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import PageContainer from "src/app/demo/components/container/PageContainer";
+import PageContainer from "src/app/components/container/PageContainer";
 import Banner from "src/components/banner/AppBanner";
 import { montserrat, poppins } from "src/constants/fonts";
 import HavePet from "./havePet/HavePet";

@@ -119,7 +119,7 @@ const Profile = ({ session }: HeaderProps) => {
               ml: 1,
             }}
           >
-            {session?.user?.email}
+            {session?.user?.username}
           </Typography>
           <IconChevronDown width="20" height="20" />
         </Box>
