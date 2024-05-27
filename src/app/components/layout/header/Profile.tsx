@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import Link from "next/link";
@@ -24,16 +24,23 @@ import {
   IconShield,
 } from "@tabler/icons-react";
 import { Session } from "next-auth";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 type HeaderProps = {
   session: Session | null;
 };
 const Profile = ({ session }: HeaderProps) => {
   const [anchorEl2, setAnchorEl2] = useState(null);
+  const router = useRouter();
   const handleClick2 = (event: any) => {
     setAnchorEl2(event.currentTarget);
   };
   const handleClose2 = () => {
     setAnchorEl2(null);
+  };
+  const handleLogout = async () => {
+    await axios.get("/api/auth/sign-out");
+    router.push("/auth/sign-in");
   };
 
   const theme = useTheme();
@@ -162,7 +169,12 @@ const Profile = ({ session }: HeaderProps) => {
         </Box>
         <Divider />
         <Box mt={2}>
-          <Button fullWidth variant="contained" color="primary">
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={() => handleLogout()}
+          >
             Logout
           </Button>
         </Box>
