@@ -11,3 +11,12 @@ export const LoginRequestSchema = z.object({
     password: z.string().min(6),
 });
 export type LoginRequest = z.infer<typeof LoginRequestSchema>;
+
+export const RegisterRequestSchema = z.object({
+    email: z.string().email(),
+    username: z.string(),
+    password: z.string().min(6),
+    phone: z.string(),
+});
+export type RegisterRequest = z.infer<typeof RegisterRequestSchema>;
+

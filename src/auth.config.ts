@@ -15,6 +15,7 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       if (isLoggedIn) return true;
+      if (nextUrl.pathname.startsWith("/auth")) return true;
       return false; // Redirect unauthenticated users to login page
     },
     async jwt({ token, user }) {

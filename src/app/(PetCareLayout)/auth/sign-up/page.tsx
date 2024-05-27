@@ -17,7 +17,7 @@ import { poppins } from "src/constants/fonts";
 import { imagePath } from "src/constants/imagePath";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 type TUserInfo = {
@@ -40,10 +40,11 @@ export default function SignUp() {
     password: "",
   });
   const [apiError, setApiError] = useState<string>("");
+  const router = useRouter();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
   ) => {
     event.preventDefault();
   };
@@ -72,27 +73,23 @@ export default function SignUp() {
 
     if (!emailError && !passwordError) {
       try {
-        const response = await axios.post("API", {
-          name: userInfo.name,
+        const response = await axios.post("/api/auth/sign-up", {
+          username: userInfo.name,
           phone: userInfo.phone,
           email: userInfo.email,
           password: userInfo.password,
         });
 
-        if (response.data.success) {
-          //   toast.success("Registration successful! Redirecting to login...");
-          //   setTimeout(() => {
-          //     router.push("/auth/sign-in");
-          //   }, 3000);
+        if (response.data.status === "SUCCESS") {
+          toast.success("Registration successful! Redirecting to login...");
+          setTimeout(() => {
+            router.push("/auth/sign-in");
+          }, 3000);
         } else {
-          if (response.data.error === "Email already exists") {
-            setErrors((prevErrors) => ({
-              ...prevErrors,
-              email: "Email already exists",
-            }));
-          } else {
-            setApiError("An error occurred during registration");
-          }
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            email: response.data.data,
+          }));
         }
       } catch (error) {
         setApiError("An error occurred while connecting to the server");
