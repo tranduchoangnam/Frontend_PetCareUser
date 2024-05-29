@@ -19,7 +19,7 @@ export default function HaveNot() {
         </Grid>
         <Grid item xs={6}>
           <TextField
-            label="Pet Type"
+            label="Breed"
             sx={{ width: "100%" }}
             size="small"
             color="secondary"
@@ -28,7 +28,7 @@ export default function HaveNot() {
         </Grid>
         <Grid item xs={6}>
           <TextField
-            label="Pet Weight"
+            label="Age"
             sx={{ width: "100%" }}
             size="small"
             color="secondary"
@@ -37,7 +37,25 @@ export default function HaveNot() {
         </Grid>
         <Grid item xs={6}>
           <TextField
-            label="Pet Gender"
+            label="Gender"
+            sx={{ width: "100%" }}
+            size="small"
+            color="secondary"
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            label="Color"
+            sx={{ width: "100%" }}
+            size="small"
+            color="secondary"
+            required
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            label="Weight(kg)"
             sx={{ width: "100%" }}
             size="small"
             color="secondary"
