@@ -36,8 +36,8 @@ export default function RegisterNewPet() {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("API", petInfo);
-      if (response.status === 200) {
+      const response = await axios.post("/api/pet/register", petInfo);
+      if (response.data.status === "SUCCESS") {
         // console.log("Pet registered successfully");
         toast.success("Pet registered successfully");
       } else {
@@ -162,7 +162,7 @@ export default function RegisterNewPet() {
                   fontSize: "20px",
                   mt: 5,
                 }}
-                onClick={handleSubmit}
+                onClick={()=>handleSubmit()}
               >
                 Register
               </Button>
