@@ -1,12 +1,20 @@
 "use client";
 
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
 import Banner from "src/components/banner/AppBanner";
 import ContactUs from "src/components/contact-us/ContactUs";
 import { montserrat, poppins } from "src/constants/fonts";
 import { toast } from "react-toastify";
+import CloseIcon from "@mui/icons-material/Close";
 
 type TPetInfo = {
   name: string;
@@ -15,9 +23,11 @@ type TPetInfo = {
   color: string;
   gender: string;
   weight: string;
+  file: File | null;
 };
 
 export default function RegisterNewPet() {
+  const [selectedFileName, setSelectedFileName] = useState("");
   const [petInfo, setPetInfo] = useState<TPetInfo>({
     name: "",
     breed: "",
@@ -25,6 +35,7 @@ export default function RegisterNewPet() {
     color: "",
     gender: "",
     weight: "",
+    file: null,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +43,23 @@ export default function RegisterNewPet() {
       ...petInfo,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleFileChange = (e: any) => {
+    const file = e.target.files[0];
+    setSelectedFileName(file.name);
+    setPetInfo({ ...petInfo, file: file });
+  };
+
+  const handleDrop = (e: any) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    setSelectedFileName(file.name);
+    setPetInfo({ ...petInfo, file: file });
+  };
+  const handleClearFile = () => {
+    setSelectedFileName("");
+    setPetInfo({ ...petInfo, file: null });
   };
 
   const handleSubmit = async () => {
@@ -78,7 +106,7 @@ export default function RegisterNewPet() {
             >
               Please fill the form below to register your new pet
             </Typography>
-            <Grid container spacing={4}>
+            <Grid container spacing={4} sx={{ mb: 5 }}>
               <Grid item xs={6}>
                 <TextField
                   label="Pet Name"
@@ -152,6 +180,68 @@ export default function RegisterNewPet() {
                 />
               </Grid>
             </Grid>
+            <input
+              type="file"
+              id="fileInput"
+              style={{ display: "none" }}
+              onChange={handleFileChange}
+            />
+            <div
+              style={{
+                border: "2px dashed #ccc",
+                borderRadius: "5px",
+                padding: "20px",
+                textAlign: "center",
+              }}
+              onDragOver={(e) => {
+                e.preventDefault();
+              }}
+              onDrop={handleDrop}
+            >
+              <Box
+                sx={{
+                  py: 3,
+                  display: "grid",
+                  alignItems: "center",
+                  justifyItems: "center",
+                  gap: 1,
+                }}
+              >
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={() => document.getElementById("fileInput")?.click()}
+                >
+                  Add Pet Image
+                </Button>
+                <Typography>Or drag and drop files</Typography>
+                {selectedFileName && (
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography>{selectedFileName}</Typography>
+                    <IconButton onClick={handleClearFile}>
+                      <CloseIcon fontSize="small" />
+                    </IconButton>
+                  </div>
+                )}
+                <div>
+                  {petInfo.file && (
+                    <img
+                      style={{
+                        maxWidth: "250px",
+                        height: "auto",
+                      }}
+                      src={URL.createObjectURL(petInfo.file)}
+                      alt="Selected Image"
+                    />
+                  )}
+                </div>
+              </Box>
+            </div>
             <Box sx={{ textAlign: "center" }}>
               <Button
                 variant="contained"
@@ -162,7 +252,7 @@ export default function RegisterNewPet() {
                   fontSize: "20px",
                   mt: 5,
                 }}
-                onClick={()=>handleSubmit()}
+                onClick={() => handleSubmit()}
               >
                 Register
               </Button>
