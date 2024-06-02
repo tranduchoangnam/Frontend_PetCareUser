@@ -21,7 +21,7 @@ export default function HavePet() {
           <TextField
             label="Select"
             select
-            sx={{ width: "40%" }}
+            sx={{ width: "50%" }}
             size="small"
             color="secondary"
           />

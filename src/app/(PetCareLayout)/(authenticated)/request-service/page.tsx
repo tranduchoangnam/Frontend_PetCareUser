@@ -56,9 +56,9 @@ const SelectService = () => {
                       <Button
                         sx={{
                           backgroundColor: havePet
-                            ? "primary.main"
+                            ? "secondary.main"
                             : "transparent",
-                          color: havePet ? "white" : "primary.main",
+                          color: havePet ? "white" : "secondary.main",
                         }}
                         onClick={() => setHavePet(true)}
                       >
@@ -68,8 +68,8 @@ const SelectService = () => {
                         sx={{
                           backgroundColor: havePet
                             ? "transparent"
-                            : "primary.main",
-                          color: havePet ? "primary.main" : "white",
+                            : "secondary.main",
+                          color: havePet ? "secondary.main" : "white",
                         }}
                         onClick={() => setHavePet(false)}
                       >
@@ -79,6 +79,30 @@ const SelectService = () => {
                   </Grid>
                 </Box>
                 {havePet ? <HavePet /> : <HaveNot />}
+                <Box>
+                  <Grid container spacing={2} sx={{ alignItems: "center" }}>
+                    <Grid item xs={5}>
+                      <Typography
+                        sx={{
+                          fontFamily: montserrat.style.fontFamily,
+                          fontWeight: 700,
+                          mr: 10,
+                        }}
+                      >
+                        Date and Time *
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <TextField
+                        id="datetime-local"
+                        type="datetime-local"
+                        sx={{ width: "50%" }}
+                        size="small"
+                        color="secondary"
+                      />
+                    </Grid>
+                  </Grid>
+                </Box>
                 <Box>
                   <Typography
                     sx={{
@@ -105,6 +129,7 @@ const SelectService = () => {
                     fontSize: "20px",
                     margin: "0 auto",
                   }}
+                  color="secondary"
                 >
                   Submit
                 </Button>

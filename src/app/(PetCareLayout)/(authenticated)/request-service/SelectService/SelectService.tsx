@@ -8,25 +8,44 @@ type Service = {
   services: any[];
 };
 
+const services: Service[] = [
+  {
+    serviceName: "Pet Healthcare",
+    services: [],
+  },
+  {
+    serviceName: "Pet Groooming",
+    services: [],
+  },
+  {
+    serviceName: "Pet Boarding",
+    services: [],
+  },
+  {
+    serviceName: "Appointments",
+    services: [],
+  },
+];
+
 export default function SelectService() {
-  const [services, setServices] = useState<Service[]>([]);
+  // const [services, setServices] = useState<Service[]>([]);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
-  useEffect(() => {
-    fetchServiceNames();
-  }, []);
+  // useEffect(() => {
+  //   fetchServiceNames();
+  // }, []);
 
-  const fetchServiceNames = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:8080/api/services/test"
-      );
-      setServices(response.data);
-      console.log("Service names:", response.data);
-    } catch (error) {
-      console.error("Error fetching service names:", error);
-    }
-  };
+  // const fetchServiceNames = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "http://localhost:8080/api/services/test"
+  //     );
+  //     setServices(response.data);
+  //     console.log("Service names:", response.data);
+  //   } catch (error) {
+  //     console.error("Error fetching service names:", error);
+  //   }
+  // };
 
   const handleServiceClick = (serviceName: string) => {
     setSelectedServices((prevSelected) =>
