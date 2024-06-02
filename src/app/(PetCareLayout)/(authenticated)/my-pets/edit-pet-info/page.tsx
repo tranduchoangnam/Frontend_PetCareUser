@@ -69,10 +69,17 @@ export default function EditPetInfo() {
   const [pet, setPet] = useState<TPetInfo | undefined>(undefined);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  const fetchPet = async (id: string) => {
+    const res = await axios.get(`/api/pet/get?id=${id}`);
+    if (res.data.status === "SUCCESS") {
+      setPet(res.data.data);
+    } else {
+      setPet(undefined);
+    }
+  };
   useEffect(() => {
     if (id) {
-      const petData = petInfo.find((p) => p.id === id);
-      setPet(petData);
+      fetchPet(id);
     }
   }, [id]);
 
@@ -89,7 +96,7 @@ export default function EditPetInfo() {
   const handleSave = async () => {
     if (pet) {
       try {
-        await axios.put(`/api/pets/${pet.id}`, pet);
+        await axios.patch(`/api/pet/update`, pet);
         router.push(`/my-pets/detail-pet-info?id=${pet.id}`);
       } catch (error) {
         toast.error("Failed to save pet info");
@@ -98,13 +105,20 @@ export default function EditPetInfo() {
   };
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const newImage = URL.createObjectURL(e.target.files[0]);
-      setPet((prevPet) => {
-        if (prevPet) {
-          return { ...prevPet, image: newImage };
+      // Encode the file using the FileReader API
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (typeof reader.result === "string") {
+          const base64String = reader.result
+          setPet((prevPet) => {
+            if (prevPet) {
+              return { ...prevPet, avatar: base64String };
+            }
+            return prevPet;
+          });
         }
-        return prevPet;
-      });
+      };
+      reader.readAsDataURL(e.target.files[0]);
     }
   };
 
@@ -238,7 +252,7 @@ export default function EditPetInfo() {
           <Grid item xs={6}>
             <Box sx={{ textAlign: "center", position: "relative" }}>
               <img
-                src={pet.avatar}
+                src={pet.avatar || "/images/profile/pet.png"}
                 alt={pet.name}
                 style={{ width: "50%", height: "auto" }}
               />
@@ -257,6 +271,7 @@ export default function EditPetInfo() {
               >
                 <EditIcon />
               </IconButton>
+              z
               <input
                 type="file"
                 accept="image/*"
