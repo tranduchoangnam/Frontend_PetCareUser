@@ -29,7 +29,8 @@ const services: Service[] = [
 
 export default function SelectService() {
   // const [services, setServices] = useState<Service[]>([]);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [selectedServices, setSelectedServices] =
+    useState<string>("Pet Healthcare");
 
   // useEffect(() => {
   //   fetchServiceNames();
@@ -48,11 +49,7 @@ export default function SelectService() {
   // };
 
   const handleServiceClick = (serviceName: string) => {
-    setSelectedServices((prevSelected) =>
-      prevSelected.includes(serviceName)
-        ? prevSelected.filter((name) => name !== serviceName)
-        : [...prevSelected, serviceName]
-    );
+    setSelectedServices(serviceName);
   };
 
   return (

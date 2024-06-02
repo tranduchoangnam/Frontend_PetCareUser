@@ -1,12 +1,10 @@
 import { Box, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 import { montserrat } from "src/constants/fonts";
-import SelectService from "../SelectService/SelectService";
 
 export default function HaveNot() {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", rowGap: 3 }}>
-      <SelectService />
       <Grid container spacing={4}>
         <Grid item xs={6}>
           <TextField

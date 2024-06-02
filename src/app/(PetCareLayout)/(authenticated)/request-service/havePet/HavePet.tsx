@@ -1,7 +1,6 @@
 import { Box, Grid, TextField, Typography } from "@mui/material";
 import React from "react";
 import { montserrat } from "src/constants/fonts";
-import SelectService from "../SelectService/SelectService";
 
 export default function HavePet() {
   return (
@@ -27,7 +26,6 @@ export default function HavePet() {
           />
         </Grid>
       </Grid>
-      <SelectService />
     </Box>
   );
 }

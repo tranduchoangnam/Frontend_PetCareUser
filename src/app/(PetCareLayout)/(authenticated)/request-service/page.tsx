@@ -15,9 +15,12 @@ import { montserrat, poppins } from "src/constants/fonts";
 import HavePet from "./havePet/HavePet";
 import HaveNot from "./haveNot/HaveNot";
 import ContactUs from "src/components/contact-us/ContactUs";
+import SelectService from "./SelectService/SelectService";
 
-const SelectService = () => {
+const RequestService = () => {
   const [havePet, setHavePet] = useState(true);
+  const [selectedServices, setSelectedServices] =
+    useState<string>("Pet Healthcare");
   return (
     <PageContainer title="Dashboard" description="this is Dashboard">
       <Box>
@@ -79,6 +82,7 @@ const SelectService = () => {
                   </Grid>
                 </Box>
                 {havePet ? <HavePet /> : <HaveNot />}
+                <SelectService />
                 <Box>
                   <Grid container spacing={2} sx={{ alignItems: "center" }}>
                     <Grid item xs={5}>
@@ -145,4 +149,4 @@ const SelectService = () => {
   );
 };
 
-export default SelectService;
+export default RequestService;
