@@ -10,6 +10,7 @@ export async function POST(request: Request) {
     `${process.env.NEXT_APP_API_URL}/api/pets`,
     {
       ...req,
+      avatar: "",
       ownerId: session?.user.id,
     },
     {

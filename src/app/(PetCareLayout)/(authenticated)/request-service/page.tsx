@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PageContainer from "src/app/components/container/PageContainer";
 import Banner from "src/components/banner/AppBanner";
 import { montserrat, poppins } from "src/constants/fonts";
@@ -16,11 +16,65 @@ import HavePet from "./havePet/HavePet";
 import HaveNot from "./haveNot/HaveNot";
 import ContactUs from "src/components/contact-us/ContactUs";
 import SelectService from "./SelectService/SelectService";
+import { Pet } from "src/app/lib/zods/pet";
+import axios from "axios";
+
+type TPetInfo = {
+  name: string;
+  breed: string;
+  age: string;
+  color: string;
+  gender: string;
+  weight: string;
+  avatar: string;
+};
 
 const RequestService = () => {
   const [havePet, setHavePet] = useState(true);
+  const [newPet, setNewPet] = useState<TPetInfo | null>(null); // [1
   const [selectedServices, setSelectedServices] =
-    useState<string>("Pet Healthcare");
+    useState<string>("healthcare");
+  const [pets, setPets] = useState<Pet[]>([]);
+  const [selectedPet, setSelectedPet] = useState<Pet | null>(null); // [2
+  const [date, setDate] = useState<string>("");
+  const fetchPets = async () => {
+    try {
+      const response = await axios.get("/api/pet/get-all");
+      if (response.data.status === "SUCCESS") {
+        setPets(response.data.data);
+      } else setPets([]);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  useEffect(() => {
+    fetchPets();
+  }, []);
+  const handleSubmit = async () => {
+    if (!havePet) {
+      try {
+        const res = await axios.post("/api/pet/register", newPet);
+        if (res.data.status === "SUCCESS") {
+          const response = await axios.post(
+            `/api/service/${selectedServices}`,
+            {
+              petId: res.data.data.id,
+              date: date,
+            },
+          );
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    } else {
+      if (selectedPet) {
+        const response = await axios.post(`/api/service/${selectedServices}`, {
+          petId: selectedPet.id,
+          date: date,
+        });
+      }
+    }
+  };
   return (
     <PageContainer title="Dashboard" description="this is Dashboard">
       <Box>
@@ -81,8 +135,15 @@ const RequestService = () => {
                     </Grid>
                   </Grid>
                 </Box>
-                {havePet ? <HavePet /> : <HaveNot />}
-                <SelectService />
+                {havePet ? (
+                  <HavePet pets={pets} onSelect={setSelectedPet} />
+                ) : (
+                  <HaveNot setNewPet={setNewPet} />
+                )}
+                <SelectService
+                  selectedServices={selectedServices}
+                  setSelectedServices={setSelectedServices}
+                />
                 <Box>
                   <Grid container spacing={2} sx={{ alignItems: "center" }}>
                     <Grid item xs={5}>
@@ -103,6 +164,9 @@ const RequestService = () => {
                         sx={{ width: "50%" }}
                         size="small"
                         color="secondary"
+                        onChange={(e) =>
+                          setDate(new Date(e.target.value).toISOString())
+                        }
                       />
                     </Grid>
                   </Grid>
@@ -134,6 +198,7 @@ const RequestService = () => {
                     margin: "0 auto",
                   }}
                   color="secondary"
+                  onClick={handleSubmit}
                 >
                   Submit
                 </Button>

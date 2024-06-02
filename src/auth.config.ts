@@ -21,7 +21,6 @@ export const authConfig = {
     async jwt({ token, user }) {
       // Persist the OAuth access_token and or the user id to the token right after signin
       if (user) {
-        console.log("jwt callback ", { token, user });
         token.id = user.id;
         token.role = user.role;
         token.username = user.username;
@@ -31,7 +30,6 @@ export const authConfig = {
       return token;
     },
     async session({ session, token, user }) {
-      console.log("session callback ", { token, user, session });
 
       return {
         ...session,
@@ -69,7 +67,6 @@ export const authConfig = {
           if (token) {
             const accessToken = token.access_token;
             const user = await get_current_user(token.access_token);
-            console.log("authorize callback ", { ...user, accessToken });
             if (user) {
               return { ...user, accessToken };
             }

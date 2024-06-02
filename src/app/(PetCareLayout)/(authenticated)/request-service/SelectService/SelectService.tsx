@@ -5,32 +5,36 @@ import { montserrat, poppins } from "src/constants/fonts";
 
 type Service = {
   serviceName: string;
-  services: any[];
+  value: string
 };
 
 const services: Service[] = [
   {
     serviceName: "Pet Healthcare",
-    services: [],
+    value:"healthcare",
   },
   {
     serviceName: "Pet Groooming",
-    services: [],
+    value:"grooming",
   },
   {
     serviceName: "Pet Boarding",
-    services: [],
+    value:"boarding",
   },
   {
-    serviceName: "Appointments",
-    services: [],
+    serviceName: "Appointment",
+    value:"appointment",
   },
 ];
 
-export default function SelectService() {
+export default function SelectService({
+  selectedServices,
+  setSelectedServices,
+}: {
+  selectedServices: string;
+  setSelectedServices: React.Dispatch<React.SetStateAction<string>>;
+}) {
   // const [services, setServices] = useState<Service[]>([]);
-  const [selectedServices, setSelectedServices] =
-    useState<string>("Pet Healthcare");
 
   // useEffect(() => {
   //   fetchServiceNames();
@@ -66,16 +70,16 @@ export default function SelectService() {
       <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
         {services.map((service) => (
           <Box
-            key={service.serviceName}
+            key={service.value}
             sx={{
               border: "2px solid #7759CC",
               borderRadius: "8px",
               p: 2,
               cursor: "pointer",
-              color: selectedServices.includes(service.serviceName)
+              color: selectedServices.includes(service.value)
                 ? "primary.dark"
                 : "secondary.main",
-              backgroundColor: selectedServices.includes(service.serviceName)
+              backgroundColor: selectedServices.includes(service.value)
                 ? "secondary.main"
                 : "transparent",
               fontFamily: poppins.style.fontFamily,
@@ -84,7 +88,7 @@ export default function SelectService() {
                 color: "primary.dark",
               },
             }}
-            onClick={() => handleServiceClick(service.serviceName)}
+            onClick={() => handleServiceClick(service.value)}
           >
             {service.serviceName}
           </Box>

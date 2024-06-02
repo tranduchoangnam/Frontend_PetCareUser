@@ -3,14 +3,18 @@ import axios from "axios";
 import { Pet } from "src/app/lib/zods/pet";
 import { NextResponse } from "next/server";
 import { auth } from "src/auth";
+import { add } from "lodash";
 export async function POST(request: Request) {
   const req = await request.json();
   const session = await auth();
   const res = await axios.post(
-    `${process.env.NEXT_APP_API_URL}/api/pets`,
+    `${process.env.NEXT_APP_API_URL}/api/healthcare-service`,
     {
       ...req,
-      ownerId: session?.user.id,
+      description: "",
+      diet: "",
+      medicine: "",
+      additionalInfo: {},
     },
     {
       headers: {
