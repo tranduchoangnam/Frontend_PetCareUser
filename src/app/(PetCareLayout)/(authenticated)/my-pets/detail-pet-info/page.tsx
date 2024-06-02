@@ -32,45 +32,23 @@ type TPetInfo = {
   treatmentPeriod?: string;
 };
 
-const petInfo: TPetInfo[] = [
-  {
-    id: "1",
-    name: "Cat",
-    breed: "Cat",
-    age: "2",
-    color: "White",
-    weight: "3.4",
-    gender: "female",
-    condition: "Good",
-    avatar: "/images/products/cat.png",
-  },
-  {
-    id: "2",
-    name: "Nam",
-    breed: "Dog",
-    age: "3",
-    color: "Brown",
-    weight: "3.4",
-    gender: "male",
-    condition: "Require treatment",
-    avatar: "/images/products/dog.png",
-    disease: "Parvovirus",
-    medicine: "Antiviral drugs",
-    nutrition: "High-protein diet",
-    treatmentPeriod: "2 weeks",
-  },
-];
-
 export default function DetailPetInfo() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const [pet, setPet] = useState<TPetInfo | undefined>(undefined);
 
+  const fetchPet = async (id: string) => {
+    const res = await axios.get(`/api/pet/get?id=${id}`);
+    if (res.data.status === "SUCCESS") {
+      setPet(res.data.data);
+    } else {
+      setPet(undefined);
+    }
+  };
   useEffect(() => {
     if (id) {
-      const petData = petInfo.find((p) => p.id === id);
-      setPet(petData);
+      fetchPet(id);
     }
   }, [id]);
 
@@ -228,7 +206,7 @@ export default function DetailPetInfo() {
           <Grid item xs={6}>
             <Box sx={{ textAlign: "center", position: "relative" }}>
               <img
-                src={pet.avatar}
+                src={pet.avatar||"/images/profile/pet.png"}
                 alt={pet.name}
                 style={{ width: "50%", height: "auto" }}
               />
