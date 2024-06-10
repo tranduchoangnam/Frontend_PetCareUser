@@ -8,8 +8,8 @@ export async function login(request: LoginRequest): Promise<LoginResponse | unde
       const res = await axios.post(`${process.env.NEXT_APP_API_URL}/api/auth/login`, request);
       return res.data as LoginResponse;
     } catch (error) {
-      console.error("Failed to fetch user:", error);
-      throw new Error("Failed to fetch user.");
+      console.error("Failed to login:", error);
+      throw new Error("Failed to login.");
     }
 }
 
@@ -18,8 +18,8 @@ export async function signUp(request: RegisterRequest): Promise<UserBase | undef
     const res = await axios.post(`${process.env.NEXT_APP_API_URL}/api/auth/register`, request);
     return res.data as UserBase;
   } catch (error) {
-    console.error("Failed to fetch user:", error);
-    throw new Error("Failed to fetch user.");
+    console.error("Failed to register:", error);
+    throw new Error("Failed to register.");
   }
 }
 

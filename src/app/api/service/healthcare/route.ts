@@ -3,7 +3,6 @@ import axios from "axios";
 import { Pet } from "src/app/lib/zods/pet";
 import { NextResponse } from "next/server";
 import { auth } from "src/auth";
-import { add } from "lodash";
 export async function POST(request: Request) {
   const req = await request.json();
   const session = await auth();

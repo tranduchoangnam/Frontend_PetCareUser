@@ -66,6 +66,7 @@ export const authConfig = {
           });
           if (token) {
             const accessToken = token.access_token;
+            console.log("Access token:", accessToken)
             const user = await get_current_user(token.access_token);
             if (user) {
               return { ...user, accessToken };

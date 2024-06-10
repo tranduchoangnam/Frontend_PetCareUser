@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Banner from "src/components/banner/AppBanner";
 import ContactUs from "src/components/contact-us/ContactUs";
@@ -24,6 +24,7 @@ type TPetInfo = {
   gender: string;
   weight: string;
   file: File | null;
+  avatar: string;
 };
 
 export default function RegisterNewPet() {
@@ -36,6 +37,7 @@ export default function RegisterNewPet() {
     gender: "",
     weight: "",
     file: null,
+    avatar: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +77,17 @@ export default function RegisterNewPet() {
       console.error("Error:", error);
     }
   };
-
+  useEffect(() => {
+    if (petInfo.file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (typeof reader.result === "string") {
+          setPetInfo({ ...petInfo, avatar: reader.result });
+        }
+      };
+      reader.readAsDataURL(petInfo.file);
+    }
+  }, [petInfo.file]);
   return (
     <Box>
       <Banner

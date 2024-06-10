@@ -18,6 +18,7 @@ import ContactUs from "src/components/contact-us/ContactUs";
 import SelectService from "./SelectService/SelectService";
 import { Pet } from "src/app/lib/zods/pet";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 type TPetInfo = {
   name: string;
@@ -51,28 +52,31 @@ const RequestService = () => {
     fetchPets();
   }, []);
   const handleSubmit = async () => {
+    let response = undefined;
     if (!havePet) {
       try {
         const res = await axios.post("/api/pet/register", newPet);
         if (res.data.status === "SUCCESS") {
-          const response = await axios.post(
-            `/api/service/${selectedServices}`,
-            {
-              petId: res.data.data.id,
-              date: date,
-            },
-          );
+          response = await axios.post(`/api/service/${selectedServices}`, {
+            petId: res.data.data.id,
+            date: date,
+          });
         }
       } catch (error) {
         console.error("Error:", error);
       }
     } else {
       if (selectedPet) {
-        const response = await axios.post(`/api/service/${selectedServices}`, {
+        response = await axios.post(`/api/service/${selectedServices}`, {
           petId: selectedPet.id,
           date: date,
         });
       }
+    }
+    if (response?.data.status === "SUCCESS") {
+      toast.success("Service requested successfully");
+    } else {
+      toast.error("Service request failed");
     }
   };
   return (
