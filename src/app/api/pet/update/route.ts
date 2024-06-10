@@ -10,7 +10,9 @@ export async function PATCH(request: Request) {
   delete req.owner;
   const res = await axios.patch(
     `${process.env.NEXT_APP_API_URL}/api/pets/${req.id}`,
-    req,
+    {...req,
+      weight: parseFloat(req.weight)
+    },
     {
       headers: {
         Authorization: `Bearer ${session?.user.accessToken}`,
