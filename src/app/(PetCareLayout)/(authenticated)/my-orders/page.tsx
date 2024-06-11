@@ -64,7 +64,7 @@ const initialOrders: Order[] = [
   },
 ];
 
-const petNames = ["Alexander Nam", "Cat", "Dog"]; // Danh sách các thú cưng
+const petNames = ["Alexander Nam", "Cat", "Dog"];
 
 function Row(props: {
   row: Order;
