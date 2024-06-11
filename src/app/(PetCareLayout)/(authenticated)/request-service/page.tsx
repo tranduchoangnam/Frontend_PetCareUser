@@ -19,6 +19,8 @@ import SelectService from "./SelectService/SelectService";
 import { Pet } from "src/app/lib/zods/pet";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { rootCertificates } from "tls";
+import { useRouter } from "next/navigation";
 
 type TPetInfo = {
   name: string;
@@ -31,6 +33,7 @@ type TPetInfo = {
 };
 
 const RequestService = () => {
+  const router = useRouter();
   const [havePet, setHavePet] = useState(true);
   const [newPet, setNewPet] = useState<TPetInfo | null>(null); // [1
   const [selectedServices, setSelectedServices] =
@@ -75,6 +78,7 @@ const RequestService = () => {
     }
     if (response?.data.status === "SUCCESS") {
       toast.success("Service requested successfully");
+      router.push("/my-orders");
     } else {
       toast.error("Service request failed");
     }
