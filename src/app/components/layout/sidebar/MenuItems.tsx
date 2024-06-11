@@ -30,21 +30,21 @@ const Menuitems = [
   },
   {
     id: uniqueId(),
-    title: "Services",
+    title: "Request Service",
     icon: IconCircleDot,
     href: "/request-service",
   },
   {
     id: uniqueId(),
-    title: "Profile",
-    icon: IconUser,
-    href: "/landing-page/",
+    title: "Orders",
+    icon: IconTable,
+    href: "/my-orders",
   },
   {
     id: uniqueId(),
     title: "Logout",
     icon: IconLogout,
-    href: "/",
+    href: "/auth/sign-in",
   },
   // {
   //   id: uniqueId(),

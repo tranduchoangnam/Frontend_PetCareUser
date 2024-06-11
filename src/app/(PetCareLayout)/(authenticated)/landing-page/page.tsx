@@ -118,9 +118,9 @@ export default function page() {
                   fontFamily: `${chewy.style.fontFamily}`,
                   mt: 6,
                 }}
-                onClick={() => router.push("/my-pets")}
+                onClick={() => router.push("/my-orders")}
               >
-                Pet health
+                Your Orders
               </Button>
             </Box>
           </Grid>
