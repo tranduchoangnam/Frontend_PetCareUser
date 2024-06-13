@@ -24,6 +24,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PendingIcon from "@mui/icons-material/Pending";
 import DoneIcon from "@mui/icons-material/Done";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 import CloseIcon from "@mui/icons-material/Close";
 import theme from "src/utils/theme";
 import ModalEditOrder from "src/components/modal/ModalEditOrder";
@@ -34,7 +35,7 @@ export interface Order {
   petName: string;
   service: string;
   date: string;
-  status: "Pending" | "Approved" | "Rejected";
+  status: "pending" | "approved" | "rejected" | "completed";
   description: string;
 }
 
@@ -44,7 +45,7 @@ const initialOrders: Order[] = [
     petName: "Alexander Nam",
     service: "Grooming",
     date: "2021-12-12 10:00 AM",
-    status: "Pending",
+    status: "pending",
     description: "Grooming for Nam",
   },
   {
@@ -52,7 +53,7 @@ const initialOrders: Order[] = [
     petName: "Cat",
     service: "Appointment",
     date: "2021-12-12 11:00 AM",
-    status: "Approved",
+    status: "approved",
     description: "Appointment for Cat",
   },
   {
@@ -60,7 +61,15 @@ const initialOrders: Order[] = [
     petName: "Dog",
     service: "HealthCare",
     date: "2021-12-12 12:00 PM",
-    status: "Rejected",
+    status: "rejected",
+    description: "HealthCare for Dog",
+  },
+  {
+    id: "4",
+    petName: "Dog",
+    service: "HealthCare",
+    date: "2021-12-12 12:00 PM",
+    status: "completed",
     description: "HealthCare for Dog",
   },
 ];
@@ -115,7 +124,7 @@ function Row(props: {
           {row.status === "approved" && (
             <Box
               sx={{
-                color: theme.palette.success.main,
+                color: theme.palette.info.main,
               }}
             >
               <Tooltip title="Approved">
@@ -131,6 +140,17 @@ function Row(props: {
             >
               <Tooltip title="Rejected">
                 <CloseIcon />
+              </Tooltip>
+            </Box>
+          )}
+          {row.status === "completed" && (
+            <Box
+              sx={{
+                color: theme.palette.success.main,
+              }}
+            >
+              <Tooltip title="Completed">
+                <DoneAllIcon />
               </Tooltip>
             </Box>
           )}
