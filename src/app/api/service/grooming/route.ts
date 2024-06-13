@@ -8,10 +8,7 @@ export async function POST(request: Request) {
   const session = await auth();
   const res = await axios.post(
     `${process.env.NEXT_APP_API_URL}/api/grooming-service`,
-    {
-      ...req,
-      additionalInfo: {},
-    },
+    req,
     {
       headers: {
         Authorization: `Bearer ${session?.user.accessToken}`,

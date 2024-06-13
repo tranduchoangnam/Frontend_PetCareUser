@@ -16,7 +16,7 @@ export async function GET(request: Request) {
         },
       },
     );
-    const pet = res.data as Pet;
+    const pet = res.data;
     return NextResponse.json({
       data: pet,
       status: "SUCCESS",

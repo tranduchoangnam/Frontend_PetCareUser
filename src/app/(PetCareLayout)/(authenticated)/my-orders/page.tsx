@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -27,6 +27,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 import theme from "src/utils/theme";
 import ModalEditOrder from "src/components/modal/ModalEditOrder";
+import axios from "axios";
 
 export interface Order {
   id: string;
@@ -67,7 +68,7 @@ const initialOrders: Order[] = [
 const petNames = ["Alexander Nam", "Cat", "Dog"];
 
 function Row(props: {
-  row: Order;
+  row: any;
   onEdit: (order: Order) => void;
   onDelete: (id: string) => void;
 }) {
@@ -94,13 +95,13 @@ function Row(props: {
           {row.petName}
         </TableCell>
         <TableCell sx={{ width: "20%", textAlign: "center" }}>
-          {row.service}
+          {row.serviceName}
         </TableCell>
         <TableCell sx={{ width: "20%", textAlign: "center" }}>
           {row.date}
         </TableCell>
         <TableCell sx={{ width: "20%", textAlign: "center" }}>
-          {row.status === "Pending" && (
+          {row.status === "pending" && (
             <Box
               sx={{
                 color: theme.palette.warning.main,
@@ -111,7 +112,7 @@ function Row(props: {
               </Tooltip>
             </Box>
           )}
-          {row.status === "Approved" && (
+          {row.status === "approved" && (
             <Box
               sx={{
                 color: theme.palette.success.main,
@@ -122,7 +123,7 @@ function Row(props: {
               </Tooltip>
             </Box>
           )}
-          {row.status === "Rejected" && (
+          {row.status === "rejected" && (
             <Box
               sx={{
                 color: theme.palette.error.main,
@@ -158,7 +159,7 @@ function Row(props: {
 
 export default function MyOrders() {
   const router = useRouter();
-  const [orders, setOrders] = useState<Order[]>(initialOrders);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [editOrder, setEditOrder] = useState<Order | null>(null);
 
   const handleEdit = (order: Order) => {
@@ -181,6 +182,19 @@ export default function MyOrders() {
     );
     setEditOrder(null);
   };
+  const fetchServices = async () => {
+    try {
+      const response = await axios.get("/api/service/all");
+      if (response.data.status === "SUCCESS") {
+        setOrders(response.data.data);
+      } else setOrders([]);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  useEffect(() => {
+    fetchServices();
+  }, []);
 
   return (
     <PageContainer>

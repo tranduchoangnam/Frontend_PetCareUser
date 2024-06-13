@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   const req = await request.json();
   const session = await auth();
   const res = await axios.post(
-    `${process.env.NEXT_APP_API_URL}/api/appointment-service`,
+    `${process.env.NEXT_APP_API_URL}/api/appointment-service/create-base`,
     req,
     {
       headers: {

@@ -7,14 +7,8 @@ export async function POST(request: Request) {
   const req = await request.json();
   const session = await auth();
   const res = await axios.post(
-    `${process.env.NEXT_APP_API_URL}/api/healthcare-service`,
-    {
-      ...req,
-      description: "",
-      diet: "",
-      medicine: "",
-      additionalInfo: {},
-    },
+    `${process.env.NEXT_APP_API_URL}/api/healthcare-service/create-base`,
+    req,
     {
       headers: {
         Authorization: `Bearer ${session?.user.accessToken}`,
