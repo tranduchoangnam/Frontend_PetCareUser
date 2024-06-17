@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   const session = await auth();
   const res = await axios.post(
     `${process.env.NEXT_APP_API_URL}/api/healthcare-service/create-base`,
-    req,
+    { ...req, serviceId: "healthcare" },
     {
       headers: {
         Authorization: `Bearer ${session?.user.accessToken}`,
