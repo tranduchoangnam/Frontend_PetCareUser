@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   const req = await request.json();
   const res = await axios.post(
     `${process.env.NEXT_APP_API_URL}/api/auth/register`,
-    { ...req, role: "user" },
+    { ...req, role: "client" },
   );
   if (res.data.id){
     const user= res.data as UserBase;

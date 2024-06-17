@@ -74,7 +74,6 @@ const initialOrders: Order[] = [
   },
 ];
 
-const petNames = ["Alexander Nam", "Cat", "Dog"];
 
 function Row(props: {
   row: any;
@@ -180,6 +179,7 @@ function Row(props: {
 export default function MyOrders() {
   const router = useRouter();
   const [orders, setOrders] = useState<Order[]>([]);
+  const [petNames, setPetNames]=useState([]);
   const [editOrder, setEditOrder] = useState<Order | null>(null);
 
   const handleEdit = (order: Order) => {
@@ -207,6 +207,7 @@ export default function MyOrders() {
       const response = await axios.get("/api/service/all");
       if (response.data.status === "SUCCESS") {
         setOrders(response.data.data);
+        setPetNames(response.data.data.map((e:any)=>e.petName))
       } else setOrders([]);
     } catch (error) {
       console.error("Error:", error);
